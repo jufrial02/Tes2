@@ -13,18 +13,23 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('container').appendChild(renderer.domElement);
 
+// Tambah lampu lantai agar terang
+const floorLight = new THREE.HemisphereLight(0xffffff, 0x222222, 1.2);
+scene.add(floorLight);
+
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(100, 100),
   new THREE.MeshStandardMaterial({ color: 0x888888, roughness: 0.8 })
 );
 floor.rotation.x = -Math.PI / 2;
+floor.receiveShadow = true;
 scene.add(floor);
 
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(10, 10, 10);
 scene.add(light);
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+const ambient = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambient);
 
 const human = createHumanModel();
