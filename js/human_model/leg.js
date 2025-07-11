@@ -22,6 +22,12 @@ export function createLeg(side = "left") {
   leg.add(upperLeg);
   leg.add(knee);
 
+  // Tambahan referensi untuk animasi
+  leg.upperLeg = upperLeg;
+  leg.knee = knee;
+
+  // Penamaan supaya mudah dicari
+  leg.name = side === "right" ? "rightLeg" : "leftLeg";
   if (side === "right") {
     leg.scale.x *= -1;
   }
