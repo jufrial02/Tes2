@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-  <title>Dunia Juf - Game</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Game Manusia</title>
+  <style>
+    body { margin: 0; }
+    #container { width: 100vw; height: 100vh; display: block; }
+    #joystick-zone { position:fixed;left:0;bottom:0;width:160px;height:160px;pointer-events:auto; }
+  </style>
 </head>
 <body>
-  <div id="joystick"></div>
+  <div id="container"></div>
+  <div id="joystick-zone"></div>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
