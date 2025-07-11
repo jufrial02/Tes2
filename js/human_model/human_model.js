@@ -1,5 +1,6 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js';
 import { createLeg } from './leg.js';
+import { createArm } from './arm.js'; // <-- Tambahkan import ini
 
 export function createHumanModel() {
   const model = new THREE.Group();
@@ -24,10 +25,21 @@ export function createHumanModel() {
   rightLeg.position.x = 0.12;
   rightLeg.position.y = 1.0;
 
+  // Tambahkan lengan
+  const leftArm = createArm('left');
+  leftArm.position.x = -0.33;
+  leftArm.position.y = 1.7;
+
+  const rightArm = createArm('right');
+  rightArm.position.x = 0.33;
+  rightArm.position.y = 1.7;
+
   model.add(body);
   model.add(head);
   model.add(leftLeg);
   model.add(rightLeg);
+  model.add(leftArm);
+  model.add(rightArm);
 
   return model;
 }
