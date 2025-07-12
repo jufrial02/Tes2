@@ -22,12 +22,9 @@ export function createLeg(side = "left") {
   leg.add(upperLeg);
   leg.add(knee);
 
-  leg.upperLeg = upperLeg;
-  leg.knee = knee;
-
-  leg.name = side === "right" ? "rightLeg" : "leftLeg";
   if (side === "right") {
     leg.scale.x *= -1;
   }
+
   return leg;
 }
