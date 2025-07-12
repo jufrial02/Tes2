@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 import { setupMovementWithJoystick } from './movement.js';
 import { createHumanModel } from './human_model/human_model.js';
 
@@ -15,9 +16,16 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('container').appendChild(renderer.domElement);
 
-// ==========================
+// OrbitControls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.12;
+controls.screenSpacePanning = true;
+controls.minDistance = 6;
+controls.maxDistance = 30;
+controls.target.set(4, 1.2, 0);
+
 // LANTAI REALISTIK
-// ==========================
 const textureLoader = new THREE.TextureLoader();
 
 const floorTexture = textureLoader.load('https://threejs.org/examples/textures/uv_grid_opengl.jpg');
@@ -54,16 +62,12 @@ scene.add(floorLight);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.35));
 
-// ==========================
 // MODEL MANUSIA - posisi pas di atas lantai
-// ==========================
 const human = createHumanModel();
 human.position.set(0, 1, 0); // y=1, pas di atas lantai
 scene.add(human);
 
-// ==========================
 // RUMAH REALISTIK SEDERHANA
-// ==========================
 const rumah = new THREE.Group();
 
 const rumahPosX = 7; // Dekat karakter, bisa digeser jika perlu
@@ -151,17 +155,13 @@ rumah.add(jendelaKanan);
 
 scene.add(rumah);
 
-// ==========================
 // LAMPU UTAMA
-// ==========================
 scene.add(new THREE.AmbientLight(0xffffff, 0.7));
 const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
 dirLight.position.set(5, 10, 7);
 scene.add(dirLight);
 
-// ==========================
 // JOYSTICK
-// ==========================
 const joystick = nipplejs.create({
   zone: document.getElementById('joystick-zone'),
   mode: 'static',
@@ -170,11 +170,10 @@ const joystick = nipplejs.create({
 });
 setupMovementWithJoystick(human, joystick);
 
-// ==========================
 // RENDER LOOP
-// ==========================
 function animate() {
   requestAnimationFrame(animate);
+  controls.update();
   renderer.render(scene, camera);
 }
 animate();
