@@ -1,17 +1,17 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js';
 
-export function createLeg(side = "left") {
+export function createLeg(side = "left", color = 0xcc8888) {
   const leg = new THREE.Group();
 
   const upperLeg = new THREE.Mesh(
     new THREE.CylinderGeometry(0.1, 0.1, 0.6, 12),
-    new THREE.MeshStandardMaterial({ color: 0xcc8888 })
+    new THREE.MeshStandardMaterial({ color })
   );
   upperLeg.position.y = -0.3;
 
   const lowerLeg = new THREE.Mesh(
     new THREE.CylinderGeometry(0.08, 0.08, 0.5, 12),
-    new THREE.MeshStandardMaterial({ color: 0xcc8888 })
+    new THREE.MeshStandardMaterial({ color })
   );
   lowerLeg.position.y = -0.55;
 
