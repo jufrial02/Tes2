@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 
 export function createHuman(scene, onReady) {
   const loader = new GLTFLoader();
@@ -22,22 +22,17 @@ export function createHuman(scene, onReady) {
 
       loadedCount++;
       if (loadedCount === totalParts) {
-        // Semua bagian sudah dimuat
         const torso = loaded.torso;
         const arm = loaded.arm;
         const leg = loaded.leg;
 
-        // Atur posisi relatif
         arm.position.set(0.4, 0.4, 0);  // kanan
         leg.position.set(0.2, -0.9, 0); // bawah
 
-        // Gabungkan jadi satu tubuh
         torso.add(arm);
         torso.add(leg);
 
-        // Tambahkan ke dunia
         scene.add(torso);
-
         if (onReady) onReady(torso);
       }
     }, undefined, (error) => {
